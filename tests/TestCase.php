@@ -4,6 +4,7 @@ namespace Doriiaan\FilamentAstrotomic\Tests;
 
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
+use Doriiaan\FilamentAstrotomic\FilamentAstrotomicServiceProvider;
 use Filament\Actions\ActionsServiceProvider;
 use Filament\FilamentServiceProvider;
 use Filament\Forms\FormsServiceProvider;
@@ -19,7 +20,6 @@ use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
-use Doriiaan\FilamentAstrotomic\FilamentAstrotomicServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -31,7 +31,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Doriiaan\\FilamentAstrotomic\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'Doriiaan\\FilamentAstrotomic\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
@@ -66,6 +66,6 @@ class TestCase extends Orchestra
 
     protected function defineDatabaseMigrations(): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 }
