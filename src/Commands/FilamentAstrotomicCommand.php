@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Doriiaan\FilamentAstrotomic\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class FilamentAstrotomicCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'filament-astrotomic';
 
     public $description = 'My command';
 
