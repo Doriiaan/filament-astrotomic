@@ -39,7 +39,7 @@ class FilamentAstrotomicContentDriver implements TranslatableContentDriver
         return $record;
     }
 
-    public function setRecordLocale(Model | Translatable $record): Model
+    public function setRecordLocale(Model|Translatable $record): Model
     {
         if (method_exists($record, 'setDefaultLocale')) {
             $record->setDefaultLocale($this->activeLocale);
@@ -91,7 +91,7 @@ class FilamentAstrotomicContentDriver implements TranslatableContentDriver
         );
     }
 
-    protected static function mutateTranslatableData(Model | Translatable $record, array $data = []): array
+    protected static function mutateTranslatableData(Model|Translatable $record, array $data = []): array
     {
         if (! method_exists($record, 'getTranslationsArray')) {
             return $data;
