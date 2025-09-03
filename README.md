@@ -1,5 +1,8 @@
 # Filament Astrotomic
 
+[![Latest Version](https://img.shields.io/packagist/v/Doriiaan/filament-astrotomic)](https://packagist.org/packages/Doriiaan/filament-astrotomic)
+[![Total Downloads](https://img.shields.io/packagist/dt/Doriiaan/filament-astrotomic)](https://packagist.org/packages/Doriiaan/filament-astrotomic)
+
 This package is an extension for [Filament](https://filamentphp.com) and [laravel-translatable](https://docs.astrotomic.info/laravel-translatable).
 
 > This package is a copy of [cactus-galaxy/filament-astrotomic](https://github.com/CactusGalaxy/FilamentAstrotomic) for Filament 4. The original package is no longer maintained.
