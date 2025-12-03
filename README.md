@@ -7,8 +7,6 @@ This package is an extension for [Filament](https://filamentphp.com) and [larave
 
 > This package is a copy of [cactus-galaxy/filament-astrotomic](https://github.com/CactusGalaxy/FilamentAstrotomic) for Filament 4. The original package is no longer maintained.
 
-> I'm the [PingMyNetwork](https://pingmynetwork.com/) Co-founder.
-
 ## Installation
 
 You can install the package via Composer:
