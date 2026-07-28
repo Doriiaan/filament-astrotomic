@@ -42,6 +42,8 @@ class TranslatableTabs extends Tabs
      */
     protected array $appendTabs = [];
 
+    protected $localeTabSchema;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -55,11 +57,46 @@ class TranslatableTabs extends Tabs
         /**
          * Merge all tabs in the correct order.
          */
-        $this->tabs(fn () => [
-            ...$this->prependTabs,
-            ...$this->localeTabs,
-            ...$this->appendTabs,
-        ]);
+        $this->tabs(function () {
+            $resource = $this->getLivewire()::getResource();
+
+            $locales = method_exists($resource, 'getTranslatableLocales')
+                ? $resource::getTranslatableLocales()
+                : $this->plugin->allLocales();
+
+            $localeTabs = collect($locales)
+                ->map(function (string $locale) {
+                    $tab = Tab::make($locale)
+                        ->label($this->plugin->getLocaleLabel($locale));
+
+                    $translatableTab = new TranslatableTab(
+                        $tab,
+                        $locale,
+                        $this->mainLocale,
+                    );
+
+                    $translatableTab->makeNameUsing($this->nameGenerator);
+
+                    $schema = $this->evaluate(
+                        $this->localeTabSchema,
+                        namedInjections: [
+                            'translatableTab' => $translatableTab,
+                        ],
+                        typedInjections: [
+                            TranslatableTab::class => $translatableTab,
+                        ],
+                    );
+
+                    return $tab->schema($schema);
+                })
+                ->all();
+
+            return [
+                ...$this->prependTabs,
+                ...$localeTabs,
+                ...$this->appendTabs,
+            ];
+        });
     }
 
     /**
@@ -85,26 +122,9 @@ class TranslatableTabs extends Tabs
      *
      * @param  callable(TranslatableTab):(array<Component>|Closure)  $tabSchema
      */
-    public function localeTabSchema(callable $tabSchema): self
+    public function localeTabSchema(callable $callback): static
     {
-        $this->localeTabs = collect($this->availableLocales)
-            ->map(function (string $locale) use ($tabSchema) {
-                $tab = Tab::make($locale)
-                    ->label($this->plugin->getLocaleLabel($locale));
-
-                $translatableTab = new TranslatableTab($tab, $locale, $this->mainLocale);
-
-                $translatableTab->makeNameUsing($this->nameGenerator);
-
-                $schema = $this->evaluate(
-                    $tabSchema,
-                    namedInjections: ['translatableTab' => $translatableTab],
-                    typedInjections: [TranslatableTab::class => $translatableTab],
-                );
-
-                return $tab->schema($schema);
-            })
-            ->all();
+        $this->localeTabSchema = $callback;
 
         return $this;
     }
@@ -115,7 +135,7 @@ class TranslatableTabs extends Tabs
      * @param  array|callable():(array)  $tabs
      * @return $this
      */
-    public function prependTabs(array | callable $tabs = []): self
+    public function prependTabs(array|callable $tabs = []): self
     {
         $this->prependTabs = $this->evaluate($tabs);
 
@@ -128,7 +148,7 @@ class TranslatableTabs extends Tabs
      * @param  array|callable():(array)  $tabs
      * @return $this
      */
-    public function appendTabs(array | callable $tabs = []): self
+    public function appendTabs(array|callable $tabs = []): self
     {
         $this->appendTabs = $this->evaluate($tabs);
 
