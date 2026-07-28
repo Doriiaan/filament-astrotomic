@@ -2,6 +2,20 @@
 
 All notable changes to `:package_name` will be documented in this file.
 
+## v1.2.0 - 2026-07-28
+
+### What's Changed
+
+* fix: respect resource getTranslatableLocales in TranslatableTabs by @AbdallaMohammed in https://github.com/Doriiaan/filament-astrotomic/pull/15
+* Bump actions/checkout from 4 to 7 by @dependabot[bot] in https://github.com/Doriiaan/filament-astrotomic/pull/14
+* Bump dependabot/fetch-metadata from 2.5.0 to 3.1.0 by @dependabot[bot] in https://github.com/Doriiaan/filament-astrotomic/pull/13
+
+### New Contributors
+
+* @AbdallaMohammed made their first contribution in https://github.com/Doriiaan/filament-astrotomic/pull/15
+
+**Full Changelog**: https://github.com/Doriiaan/filament-astrotomic/compare/v1.1.0...v1.2.0
+
 ## v1.1.0 - 2026-03-15
 
 Add support for Filament v5
